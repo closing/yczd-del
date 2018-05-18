@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yczd.hp.web.sample.springmvc">
+
+
+	<select id="selectByPrimaryKey" parameterType="Integer"
+							resultType="com.yczd.hp.web.sample.springmvc.User">
+		SELECT
+			ID AS ID,
+			USERNAME AS USERNAME,
+			EMAIL AS EMAIL,
+			PASSWORD AS PASSWORD
+		FROM
+			USER
+		WHERE
+			ID = #{id}
+	</select>
+
+</mapper>
