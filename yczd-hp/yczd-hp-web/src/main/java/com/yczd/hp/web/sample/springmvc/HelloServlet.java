@@ -36,4 +36,8 @@ public class HelloServlet {
 		return mov;
 	}
 
+	@RequestMapping("/body1")
+	public String signin() {
+		return "body1";
+	}
 }
