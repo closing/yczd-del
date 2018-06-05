@@ -18,7 +18,45 @@
 	<!-- 默认的注解映射的支持，自动注册DefaultAnnotationHandlerMapping和AnnotationMethodHandlerAdapter -->
 	<mvc:annotation-driven />
 
-	<!-- 视图解释类 -->
+
+	<!-- Tiles 配置相关bean
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+
+    -->
+		<!-- <property name="suffix" value=".pages" />
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+	</bean>-->
+
+	<!-- Thymeleaf 试图配置 -->
+	<bean id="templateResolver"
+		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
+
+<!-- <property name="applicationContext" ref="applicationContext" /> -->
+		<property name="prefix" value="/WEB-INF/thymeleafs/" />
+		<property name="suffix" value=".html" />
+		<property name="templateMode" value="HTML5" />
+	</bean>
+	<bean id="templateEngine"
+		class="org.thymeleaf.spring5.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+	<bean id="viewResolver"
+		class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
+		<property name="templateEngine" ref="templateEngine" />
+	</bean>
+
+	<!-- JSP视图解释类 -->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
@@ -26,17 +64,19 @@
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
 	</bean>
-
-	<!-- root path  -->
+	<!-- root path -->
 	<mvc:view-controller path="/" view-name="index" />
+	<!-- <mvc:view-controller path="/" view-name="signin/signin" /> -->
 
 	<!-- 对静态资源文件的访问 -->
-	<mvc:resources mapping="/images/**"
-		location="/resources/images/" cache-period="31556926" />
-	<mvc:resources mapping="/js/**" location="/resources/js/"
-		cache-period="31556926" />
-	<mvc:resources mapping="/css/**"
+	<mvc:resources mapping="/resources/img/**"
+		location="/resources/img/" cache-period="31556926" />
+	<mvc:resources mapping="/resources/js/**"
+		location="/resources/js/" cache-period="31556926" />
+	<mvc:resources mapping="/resources/css/**"
 		location="/resources/css/" cache-period="31556926" />
+
+	<!-- <mvc:resources mapping="/resources/**" location="/resources/" /> -->
 
 
 </beans>
