@@ -41,11 +41,10 @@
 	<!-- Thymeleaf 试图配置 -->
 	<bean id="templateResolver"
 		class="org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver">
-
-<!-- <property name="applicationContext" ref="applicationContext" /> -->
 		<property name="prefix" value="/WEB-INF/thymeleafs/" />
 		<property name="suffix" value=".html" />
 		<property name="templateMode" value="HTML5" />
+		<property name="characterEncoding" value="UTF-8" />
 	</bean>
 	<bean id="templateEngine"
 		class="org.thymeleaf.spring5.SpringTemplateEngine">
@@ -54,7 +53,11 @@
 	<bean id="viewResolver"
 		class="org.thymeleaf.spring5.view.ThymeleafViewResolver">
 		<property name="templateEngine" ref="templateEngine" />
+		<property name="characterEncoding" value="UTF-8" />
 	</bean>
+	<!-- FileUpload -->
+	<bean id= "multipartResolver"
+	class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 
 	<!-- JSP视图解释类 -->
 	<bean
