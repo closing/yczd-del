@@ -60,6 +60,11 @@
 			<param-value>classpath:/spring/spring-mvc.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		<multipart-config>
+			<location>/tmp/uploads</location>
+			<max-file-size>2097152</max-file-size>
+			<max-request-size>4194304</max-request-size>
+		</multipart-config>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>springMVC</servlet-name>
@@ -81,8 +86,8 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
 
 </web-app>
