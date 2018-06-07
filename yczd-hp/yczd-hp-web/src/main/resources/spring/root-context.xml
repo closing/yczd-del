@@ -12,10 +12,10 @@
 		http://www.springframework.org/schema/tx/spring-tx.xsd
 		">
 
-	<!-- Mybatis -->
 	<context:component-scan
 		base-package="com.yczd.hp.web.sample"></context:component-scan>
 
+	<!-- dataSource -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:jdbc.properties" />
@@ -38,7 +38,19 @@
 		<!--<property name="maxWait" value="${maxWait}"></property>-->
 	</bean>
 
-	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件 -->
+	<!-- JdbcTemp
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean> -->
+	<!-- NamedParameterJdbcTemplate -->
+	<bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	 <!-- Hibernate -->
+	<!-- Mybatis -->
+	<!-- spring和MyBatis完美整合，不需要mybatis的配置映射文件
 	<bean id="sqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
@@ -50,17 +62,19 @@
 			</list>
 		</property>
 	</bean>
-	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+    -->
+	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 
+
 	<tx:annotation-driven
 		transaction-manager="transactionManager" />
-	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSessionFactory" />
-	</bean>
-
+    -->
 
 </beans>
